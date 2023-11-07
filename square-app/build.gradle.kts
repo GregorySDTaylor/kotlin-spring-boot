@@ -23,4 +23,5 @@ repositories {
 dependencies {
     implementation(project(":random-adapter"))
 //    implementation(project(":day-of-month-adapter"))
+    implementation("org.springframework:spring-context:6.0.13")
 }
