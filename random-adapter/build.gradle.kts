@@ -1,5 +1,7 @@
 plugins {
-    kotlin("jvm") version "1.8.22"
+    id("io.spring.dependency-management")
+    kotlin("jvm")
+    kotlin("plugin.spring")
 }
 
 group = "com.example"
@@ -15,6 +17,13 @@ repositories {
     mavenCentral()
 }
 
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.1.5")
+    }
+}
+
 dependencies {
     api(project(":number-provider"))
+    implementation("org.springframework.boot:spring-boot-autoconfigure")
 }

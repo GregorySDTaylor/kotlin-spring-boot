@@ -1,28 +1,21 @@
 package squareapp
 
 import numberprovider.NumberProvider
-import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.Configuration
+import org.springframework.boot.ApplicationArguments
+import org.springframework.boot.ApplicationRunner
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 import org.springframework.stereotype.Service
-import randomadapter.RandomAdapter
 
-class SquareApplication {}
-
-fun main(args: Array<String>) {
-    val applicationContext = AnnotationConfigApplicationContext(ApplicationConfiguration::class.java)
-    val squareAnnouncer = applicationContext.getBean(SquareAnnouncer::class.java)
-    squareAnnouncer.announceSquare()
+@SpringBootApplication
+class SquareApplication(private val squareAnnouncer : SquareAnnouncer) : ApplicationRunner {
+    override fun run(args: ApplicationArguments?) {
+        squareAnnouncer.announceSquare()
+    }
 }
 
-@Configuration
-@ComponentScan
-open class ApplicationConfiguration {
-    @Bean
-    open fun numberProvider() : NumberProvider {
-        return RandomAdapter()
-    }
+fun main(args: Array<String>) {
+    runApplication<SquareApplication>(*args)
 }
 
 interface SquareAnnouncer {

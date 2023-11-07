@@ -1,6 +1,8 @@
 plugins {
-    kotlin("jvm") version "1.8.22"
-    id("application")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    kotlin("jvm")
+    kotlin("plugin.spring")
 }
 
 group = "com.example"
@@ -12,16 +14,19 @@ java {
     }
 }
 
-application {
-    mainClass = "squareapp.SquareApplicationKt"
-}
-
 repositories {
     mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.1.5")
+    }
 }
 
 dependencies {
     implementation(project(":random-adapter"))
 //    implementation(project(":day-of-month-adapter"))
-    implementation("org.springframework:spring-context:6.0.13")
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
 }
