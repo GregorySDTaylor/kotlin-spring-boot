@@ -21,6 +21,6 @@ repositories {
 }
 
 dependencies {
-//    implementation(project(":random-adapter"))
+    implementation(project(":random-adapter"))
 //    implementation(project(":day-of-month-adapter"))
 }

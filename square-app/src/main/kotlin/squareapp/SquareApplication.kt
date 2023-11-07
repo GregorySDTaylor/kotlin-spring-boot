@@ -1,18 +1,24 @@
 package squareapp
 
+import numberprovider.NumberProvider
+import randomadapter.RandomAdapter
+
 class SquareApplication {}
 
 fun main(args: Array<String>) {
-    val squareAnnouncer = SystemOutSquareAnnouncer()
-    squareAnnouncer.announceSquareFor(321)
+    val numberProvider = RandomAdapter()
+    val squareAnnouncer = SystemOutSquareAnnouncer(numberProvider)
+    squareAnnouncer.announceSquare()
 }
 
 interface SquareAnnouncer {
-    fun announceSquareFor(number: Int)
+    fun announceSquare()
 }
 
-class SystemOutSquareAnnouncer : SquareAnnouncer {
-    override fun announceSquareFor(number: Int) {
+class SystemOutSquareAnnouncer(private val numberProvider: NumberProvider) : SquareAnnouncer {
+
+    override fun announceSquare() {
+        val number = numberProvider.provideNumber()
         val square = number * number
         println("$number squared is $square")
     }
